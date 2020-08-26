@@ -3,11 +3,60 @@ html {
     color: white;
 }
 
-.main-table {
-    margin-left: auto;
-    margin-right: auto;
+table.main-table {
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-collapse: collapse;
 }
 
+table.main-table tr {
+    border: 2px solid white;
+}
+
+
+.header-tr {
+    background-color: #9cb4c8;
+}
 .header-text {
     font-family: sans-serif;
 }
+
+.form-group {
+    font-size: 18px;
+    padding: 10px 10px;
+}
+
+.form-group * {
+    padding-left: 10px;
+}
+
+.form-group>span {
+    font-weight: bold;
+}
+
+.form-group #submit-btn {
+    border-radius: 10px;
+    color: white;
+    border-color: green;
+    background-color: green;
+    font-size: 18px;
+    padding: 5px;
+}
+.form-group #submit-btn:disabled {
+    border-color: darkseagreen;
+    background-color: darkseagreen;
+}
+.form-group #submit-btn:hover {
+    opacity:.85;
+    cursor: pointer;
+    transform:scale(1.3,1.3);
+    -webkit-transform:scale(1.3,1.3);
+    -moz-transform:scale(1.3,1.3);
+}
+
+
+table.results-table {width: 100%; border-collapse: collapse; text-align: center;}
+table.results-table td {padding: 15px 12px;}
+table.results-table thead tr {font-weight: bold; border-top: 1px solid white;}
+table.results-table tbody tr:hover {background: dodgerblue; opacity: .5}
