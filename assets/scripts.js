@@ -42,12 +42,32 @@ $('#request-form').submit(function (event) {
     let data = $(this).serialize();
 
     $.post(action, data, function (response) {
-        if (response.RESULT_CODE == 1) {
-
+        if (response.RESULT_CODE === 1) {
+            addResultRow(response.PROPS);
         } else {
-            alert(response.RESPONSE);
+            alert(response.PROPS);
         }
     });
 });
 
 
+/*
+* Adding results to the table
+* */
+function addResultRow(response) {
+    $('.results-table #results_table_body').append(
+        "<tr>" +
+        "<td>" + response.x + "</td>" +
+        "<td>" + response.y + "</td>" +
+        "<td>" + response.r + "</td>" +
+        "<td>" + response.result + "</td>" +
+        "<td>" + response.currentTime + "</td>" +
+        "<td>" + response.computedTime + "</td>" +
+        "</tr>"
+    );
+}
+
+
+$(window).resize(drawCanvas)
+$(window).on("load", drawCanvas)
+$("input[type='radio']").change(drawCanvas)
