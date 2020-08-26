@@ -1,0 +1,13 @@
+html {
+    background: #1874d2;
+    color: white;
+}
+
+.main-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-text {
+    font-family: sans-serif;
+}

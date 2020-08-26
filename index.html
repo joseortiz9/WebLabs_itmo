@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebLab1</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="/assets/styles.css">
+</head>
+<body>
+<table class="main-table">
+    <tbody>
+        <tr>
+            <h1 class="header-text">
+                Ортис Корреа Хосе Давид - Р3232 - Вар. 2813
+            </h1>
+        </tr>
+
+        <tr>
+            <canvas id="graph-canvas"></canvas>
+        </tr>
+
+        <tr>
+            <div class="form-container">
+                <form action="handler.php" method="post">
+                    <div class="form-group">
+                        <span class="label">X: </span>
+                        <div id="options_x"></div>
+                    </div>
+                    <div class="form-group">
+                        <span class="label">Y</span>
+                        <input type="text" id="y" name="y" class="form-control" oninput="validateInput()" onchange="validateInput()">
+                    </div>
+                    <div class="form-group">
+                        <span class="label">R: </span>
+                        <div id="options_r"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" id="submit-btn" value="send" disabled>
+                    </div>
+                </form>
+            </div>
+        </tr>
+
+        <tr>
+            <table class="results-table">
+                <thead>
+                    <td>X</td>
+                    <td>Y</td>
+                    <td>R</td>
+                    <td>RESULT</td>
+                    <td>Current time</td>
+                    <td>Computation time</td>
+                </thead>
+                <tbody id="results_table_body">
+                </tbody>
+            </table>
+        </tr>
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script src="/assets/scripts.js"></script>
+</body>
+</html>
