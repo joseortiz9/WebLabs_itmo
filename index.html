@@ -30,25 +30,28 @@
 
             <tr>
                 <td>
-                    <div class="form-container">
+                    <table class="form-table">
                         <form id="request-form">
-                            <div class="form-group">
-                                <span>X: </span>
-                                <div id="options_x"></div>
-                            </div>
-                            <div class="form-group">
-                                <span>Y:</span>
-                                <input type="text" id="y" name="y" class="form-control" oninput="validateInput()" onchange="validateInput()">
-                            </div>
-                            <div class="form-group">
-                                <span>R: </span>
-                                <div id="options_r"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" id="submit-btn" value="send" disabled>
-                            </div>
+                            <tr>
+                                <td class="form-control-title"><span>X: </span></td>
+                                <td><div id="options_x"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="form-control-title"><span>Y: </span></td>
+                                <td>
+                                    <input type="text" id="y" name="y" class="form-control" form="request-form" oninput="validateInput()" onchange="validateInput()">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-control-title"><span>R: </span></td>
+                                <td><div id="options_r"></div></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" id="submit-btn" value="send" disabled></td>
+                            </tr>
                         </form>
-                    </div>
+                    </table>
                 </td>
             </tr>
 
@@ -60,8 +63,8 @@
                             <th>Y</th>
                             <th>R</th>
                             <th>RESULT</th>
-                            <th>Current time</th>
-                            <th>Computation time</th>
+                            <th>Current Time</th>
+                            <th>Computation Time</th>
                         </thead>
                         <tbody id="results_table_body">
                         </tbody>
