@@ -17,22 +17,27 @@ foreach ($x as $val) {
 }
 
 if (!$validatedX or filter_var($y, FILTER_VALIDATE_FLOAT, $argsXandY) === FALSE or filter_var($r, FILTER_VALIDATE_FLOAT, $argsR) === FALSE) {
-    echo json_encode(array('RESULT_CODE' => 1, 'PROPS' => 'What are u trying to do??? don\'t joke with my validation'));
+    echo json_encode(array('RESULT_CODE' => 1, 'RESULTS' => 'What are u trying to do? something is wrong with input'));
     die();
 }
 
+$response = array('RESULT_CODE' => 0, 'RESULTS' => array());
 
-$response = json_encode(
-    array('RESULT_CODE' => 0,
-          'PROPS' =>
-              array('x' => $x,
-                  'y' => $y,
-                  'r' => $r,
-                  'result' => true,
-                  'currentTime' => date("Y-m-d H:i:s"),
-                  'computedTime' => (microtime() - $start)
-              )
-    )
-);
+foreach ($x as $valX) {
+    $data = array('x' => $valX,
+        'y' => $y,
+        'r' => $r,
+        'result' => checkInsideFunc($valX, $y, $r),
+        'currentTime' => date("Y-m-d H:i:s"),
+        'computedTime' => (microtime() - $start)
+    );
+    array_push($response['RESULTS'], $data);
+}
 
-echo $response;
+echo json_encode($response);
+
+
+function checkInsideFunc($x, $y, $r) {
+
+    return false;
+}

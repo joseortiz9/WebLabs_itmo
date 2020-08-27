@@ -36,7 +36,7 @@ function validateInput() {
 
     console.log('validX=' + validX + ', validY=' + validR + ', validR=' + validR);
 
-        $('#submit-btn').attr('disabled', !(validX && validY && validR));
+    $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
     return validX && validY && validR;
 }
@@ -57,10 +57,10 @@ $('#request-form').submit(function (event) {
 
     $.post(action, data, function (response) {
         if (response.RESULT_CODE === 0) {
-            addResultRow(response.PROPS);
+            response.RESULTS.map(item => addResultRow(item));
         } else {
             alert(response.PROPS);
-            console.log(response.PROPS);
+            console.log(response.RESULTS);
         }
     });
 });
