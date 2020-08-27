@@ -38,6 +38,10 @@ echo json_encode($response);
 
 
 function checkInsideFunc($x, $y, $r) {
+    if (($x<=0 && $y>=0 && $y <= ($x + $r/2)) //linear function
+        or ($y>=0 && $x>=0 && $y <= sqrt($r*$r - $x*$x)) //circular function
+        or ($y<=0 && $x>=0 &&  $y>=-$r && $x<=$r)) //lines on r
+        return true;
 
     return false;
 }

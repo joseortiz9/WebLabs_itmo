@@ -3,6 +3,29 @@ html {
     color: white;
 }
 
+main {
+    margin: auto 80px;
+    display: block;
+}
+@media(max-width: 800px) {
+    main {
+        margin: auto 50px;
+    }
+}
+
+main::after {
+    content: "nobody sees me!";
+    font-size: 10px;
+    font-style: italic;
+}
+
+#graph-canvas {
+    height: 30vh;
+    margin: auto;
+    display: block;
+}
+
+
 table.main-table {
     width: 100%;
     border: 2px solid white;
@@ -15,10 +38,29 @@ table.main-table tr {
 
 
 .header-tr {
-    background-color: #9cb4c8;
+    background-color: #55efc4;
+    background-image: linear-gradient(315deg, #55efc4 0%, #000000 74%);
 }
 .header-text {
     font-family: sans-serif;
+}
+[data-melo~="ig"] {
+    display: inline-block;
+}
+[data-melo~="weird-title"] {
+    transform: skew(-15deg, -8deg);
+}
+[data-melo~="round-left"] {
+    transform: rotate(-5deg);
+}
+[data-melo~="round-left1"] {
+    transform: rotate(-3deg);
+}
+[data-melo~="round-right"] {
+    transform: rotate(2deg);
+}
+[data-melo~="round-right1"] {
+    transform: rotate(5deg);
 }
 
 
@@ -36,6 +78,10 @@ table.main-table tr {
 .form-table tr td.form-control-title {
     text-align: center;
     font-weight: bold;
+}
+
+.form-table tr td:not(label) {
+    margin-left: 10px;
 }
 
 .form-table #submit-btn {
@@ -59,7 +105,14 @@ table.main-table tr {
 }
 
 
-table.results-table {width: 100%; border-collapse: collapse; text-align: center;}
+table.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-image: url(images/orcs_flying.gif);
+    background-size: 25%;
+    background-repeat: repeat;
+}
 table.results-table td {padding: 15px 12px;}
 table.results-table thead tr {font-weight: bold; border-top: 1px solid white;}
 table.results-table tbody tr:hover {background: dodgerblue; opacity: .5}

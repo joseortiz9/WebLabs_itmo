@@ -17,14 +17,13 @@ for (const number of valuesR) {
 
 /*
 * validate input
-* TODO: CORRECT WHEN THERE IS TEXT AFTER THE NUMBER
 * */
 function validateY(input) {
-    let val = parseFloat(input.replace(',','.'));
-    if (isNaN(val))
+    let val = parseFloat(input);
+    if (isNaN(input))
         return false;
 
-    return val >= -5 && val <= 3;
+    return (val >= -5 && val <= 3);
 }
 
 function validateInput() {
@@ -33,8 +32,6 @@ function validateInput() {
 
     validX = $('input:checkbox').filter(':checked').length > 0;
     validR = $('input:radio').filter(':checked').length === 1;
-
-    console.log('validX=' + validX + ', validY=' + validR + ', validR=' + validR);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
@@ -57,7 +54,11 @@ $('#request-form').submit(function (event) {
 
     $.post(action, data, function (response) {
         if (response.RESULT_CODE === 0) {
-            response.RESULTS.map(item => addResultRow(item));
+            drawCanvas();
+            response.RESULTS.map(item => {
+                addResultRow(item);
+                drawPoint(item.x, item.y, item.r);
+            });
         } else {
             alert(response.PROPS);
             console.log(response.RESULTS);
@@ -84,4 +85,4 @@ function addResultRow(response) {
 
 $(window).resize(drawCanvas)
 $(window).on("load", drawCanvas)
-$("input[type='radio']").change(drawCanvas)
+$("input:radio").change(drawCanvas)
