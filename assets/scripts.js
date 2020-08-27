@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    if (localStorage.getItem("results") != null) {
+        let localData = JSON.parse(localStorage.getItem("results"));
+        localData.map(item => addResultRow(item));
+    }
+});
+
 /*
 * Filling the X and R inputs
 * */
@@ -56,6 +63,7 @@ $('#request-form').submit(function (event) {
         if (response.RESULT_CODE === 0) {
             drawCanvas();
             response.RESULTS.map(item => {
+                addToLocalStorage(item);
                 addResultRow(item);
                 drawPoint(item.x, item.y, item.r);
             });
@@ -65,6 +73,14 @@ $('#request-form').submit(function (event) {
         }
     });
 });
+
+
+function addToLocalStorage(item) {
+    let localData = localStorage.getItem("results");
+    localData = localData ? JSON.parse(localData) : [];
+    localData.push(item);
+    localStorage.setItem("results", JSON.stringify(localData));
+}
 
 
 /*
