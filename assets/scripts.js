@@ -68,7 +68,7 @@ $('#request-form').submit(function (event) {
                 drawPoint(item.x, item.y, item.r);
             });
         } else {
-            alert(response.PROPS);
+            alert(response.RESULTS);
             console.log(response.RESULTS);
         }
     });
