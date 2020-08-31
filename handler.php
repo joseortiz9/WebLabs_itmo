@@ -5,18 +5,19 @@ $y = $_POST['y'];
 $r = $_POST['r'];
 header('Content-type: application/json');
 
-$argsXandY = array('options' => array('min_range' => -5, 'max_range' => 3));
-$argsR = array('options' => array('min_range' => 1, 'max_range' => 3));
+$argsX = array('-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3');
+$argsR = array('1', '1.5', '2', '2.5', '3');
 
 $validatedX = true;
 foreach ($x as $val) {
-    if (filter_var($val, FILTER_VALIDATE_FLOAT, $argsXandY) === FALSE) {
+    if (filter_var($val, FILTER_VALIDATE_FLOAT) === FALSE or !in_array($val, $argsX)) {
         $validatedX = false;
         break;
     }
 }
 
-if (!$validatedX or filter_var($y, FILTER_VALIDATE_FLOAT, $argsXandY) === FALSE or filter_var($r, FILTER_VALIDATE_FLOAT, $argsR) === FALSE) {
+if (!$validatedX or !in_array($r, $argsR) or ($y < -5 or $y > 3)
+    or filter_var($y, FILTER_VALIDATE_FLOAT) === FALSE or filter_var($r, FILTER_VALIDATE_FLOAT) === FALSE) {
     echo "{\"RESULT_CODE\": \"". 1 ."\", \"RESULTS\": \"What are u trying to do? something is wrong with input\"}";
     die();
 }
