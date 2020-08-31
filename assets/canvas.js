@@ -32,8 +32,8 @@ function drawCanvas() {
 
     canvasCtx.clearRect(0, 0, width, height);
     canvasCtx.font='8px sans-serif';
-    canvasCtx.strokeStyle = "rgba(25,111,25,0.8)";
-    canvasCtx.fillStyle = "rgba(25,111,25,0.8)";
+    canvasCtx.strokeStyle = "rgba(255,255,255,0.8)";
+    canvasCtx.fillStyle = "rgba(255,255,255,0.8)";
 
     //circle on the right up
     canvasCtx.beginPath();

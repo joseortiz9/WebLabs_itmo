@@ -60,7 +60,7 @@ $('#request-form').submit(function (event) {
     let data = $(this).serialize();
 
     $.post(action, data, function (response) {
-        if (response.RESULT_CODE === 0) {
+        if (response.RESULT_CODE === '0') {
             drawCanvas();
             response.RESULTS.map(item => {
                 addToLocalStorage(item);
@@ -87,12 +87,13 @@ function addToLocalStorage(item) {
 * Adding results to the table
 * */
 function addResultRow(response) {
+    let rowStyle = (response.result === 'true') ? 'green-row' : 'red-row';
     $('.results-table #results_table_body').append(
         "<tr>" +
         "<td>" + response.x + "</td>" +
         "<td>" + response.y + "</td>" +
         "<td>" + response.r + "</td>" +
-        "<td>" + response.result + "</td>" +
+        "<td class="+ rowStyle +">" + response.result + "</td>" +
         "<td>" + response.currentTime + "</td>" +
         "<td>" + response.computedTime + "</td>" +
         "</tr>"

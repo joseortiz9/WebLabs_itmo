@@ -17,31 +17,33 @@ foreach ($x as $val) {
 }
 
 if (!$validatedX or filter_var($y, FILTER_VALIDATE_FLOAT, $argsXandY) === FALSE or filter_var($r, FILTER_VALIDATE_FLOAT, $argsR) === FALSE) {
-    echo json_encode(array('RESULT_CODE' => 1, 'RESULTS' => 'What are u trying to do? something is wrong with input'));
+    echo "{\"RESULT_CODE\": \"". 1 ."\", \"RESULTS\": \"What are u trying to do? something is wrong with input\"}";
     die();
 }
 
-$response = array('RESULT_CODE' => 0, 'RESULTS' => array());
+$response = "{\"RESULT_CODE\":\"". 0 ."\", \"RESULTS\": [";
 
 foreach ($x as $valX) {
-    $data = array('x' => $valX,
-        'y' => $y,
-        'r' => $r,
-        'result' => checkInsideFunc($valX, $y, $r),
-        'currentTime' => date("Y-m-d H:i:s"),
-        'computedTime' => (microtime() - $start)
-    );
-    array_push($response['RESULTS'], $data);
+    $data = "{ \"x\":" . "\"" . $valX . "\""
+        . ", \"y\":" . "\"" . $y . "\""
+        . ", \"r\":" . "\"" . $r . "\""
+        . ", \"result\":" . "\"" . checkInsideFunc($valX, $y, $r) . "\""
+        . ", \"currentTime\":" . "\"" . date("Y-m-d H:i:s") . "\""
+        . ", \"computedTime\":" . "\"". (microtime() - $start) . "\""
+        . "}";
+    $data .= ($valX === end($x)) ? "" : ",";
+    $response .= $data;
 }
+$response .= "]}";
 
-echo json_encode($response);
+echo $response;
 
 
 function checkInsideFunc($x, $y, $r) {
     if (($x<=0 && $y>=0 && $y <= ($x + $r/2)) //linear function
         or ($y>=0 && $x>=0 && $y <= sqrt($r*$r - $x*$x)) //circular function
         or ($y<=0 && $x>=0 &&  $y>=-$r && $x<=$r)) //lines on r
-        return true;
+        return 'true';
 
-    return false;
+    return 'false';
 }
