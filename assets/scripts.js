@@ -91,11 +91,11 @@ function addResultRow(response) {
     $('.results-table #results_table_body').append(
         "<tr>" +
         "<td>" + response.x + "</td>" +
-        "<td>" + response.y + "</td>" +
+        "<td class='column-limited'>" + response.y + "</td>" +
         "<td>" + response.r + "</td>" +
         "<td class="+ rowStyle +">" + response.result + "</td>" +
         "<td>" + response.currentTime + "</td>" +
-        "<td>" + response.computedTime + "</td>" +
+        "<td class='column-limited'>" + response.computedTime + "</td>" +
         "</tr>"
     );
 }

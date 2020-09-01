@@ -30,7 +30,7 @@ foreach ($x as $valX) {
         . ", \"r\":" . "\"" . $r . "\""
         . ", \"result\":" . "\"" . checkInsideFunc($valX, $y, $r) . "\""
         . ", \"currentTime\":" . "\"" . date("Y-m-d H:i:s") . "\""
-        . ", \"computedTime\":" . "\"". (microtime() - $start) . "\""
+        . ", \"computedTime\":" . "\"". round(microtime() - $start, 8) . "\""
         . "}";
     $data .= ($valX === end($x)) ? "" : ",";
     $response .= $data;

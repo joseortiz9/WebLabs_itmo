@@ -107,6 +107,7 @@ table.main-table tr {
 
 table.results-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     text-align: center;
     background-image: url(images/orcs_flying.gif);
@@ -118,3 +119,4 @@ table.results-table thead tr {font-weight: bold; border-top: 1px solid white;}
 table.results-table tbody tr:hover {background: dodgerblue; opacity: .5}
 table.results-table tbody tr td.green-row {background: rgba(0, 255, 0, 0.15);}
 table.results-table tbody tr td.red-row {background: rgba(255, 0, 0, 0.15);}
+table.results-table tbody tr td.column-limited {word-break: break-all;}
