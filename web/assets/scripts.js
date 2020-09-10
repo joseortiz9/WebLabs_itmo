@@ -8,37 +8,35 @@ $(document).ready(function() {
 /*
 * Filling the X and R inputs
 * */
-const valuesX = ['-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3'];
+const valuesX = ['-3', '-2', '-1', '0', '1', '2', '3', '4', '5'];
 const valuesR = ['1', '1.5', '2', '2.5', '3'];
 for (const number of valuesX) {
     $('#options_x')
-        .append(`<input type="checkbox" id="${number}" name="x[]" value="${number}" form="request-form">`)
-        .append(`<label for="${number}">${number}</label>`);
+        .append(`<div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="${number}" name="x[]" value="${number}">
+                    <label class="form-check-label" for="${number}">${number}</label>
+                 </div>`);
 }
 for (const number of valuesR) {
-    $('#options_r')
-        .append(`<input type="radio" id="${number}" name="r" value="${number}" form="request-form" ${(number==='1') ? 'checked' : ''}>`)
-        .append(`<label for="${number}">${number}</label>`);
+    $('select#r').append(`<option value="${number}" ${(number==='1') ? 'selected' : ''}/>${number}</option>`);
 }
 
 
 /*
 * validate input
 * */
-function validateY(input) {
+function validateRange(input, minRange) {
     let val = parseFloat(input);
     if (isNaN(input))
         return false;
 
-    return (val >= -5 && val <= 3);
+    return (val >= minRange && val <= 3);
 }
 
 function validateInput() {
-    var validX, validY, validR;
-    validY = validateY($('input#y').val());
-
-    validX = $('input:checkbox').filter(':checked').length > 0;
-    validR = $('input:radio').filter(':checked').length === 1;
+    let validX = $('input:checkbox').filter(':checked').length > 0;
+    let validY = validateRange($('input#y').val(), -3);
+    let validR = validateRange($('select#r option:selected'), 1);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
@@ -102,4 +100,4 @@ function addResultRow(response) {
 
 $(window).resize(drawCanvas)
 $(window).on("load", drawCanvas)
-$("input:radio").change(drawCanvas)
+$("select#r").change(drawCanvas)

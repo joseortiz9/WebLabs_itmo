@@ -16,79 +16,85 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="./assets/images/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/styles.css">
 </head>
 
 <body>
-<main>
-    <table class="main-table">
-        <tbody>
-        <tr class="header-tr">
-            <th>
-                <h1 class="header-text">
-                    <span data-melo="ig round-left">Ортис</span>
-                    <span data-melo="ig round-left1">Корреа</span>
-                    <span data-melo="ig round-right">Хосе</span>
-                    <span data-melo="ig round-right1">Давид</span>
-                    - Р3232 -
-                    <span data-melo="ig weird-title">Вар. 2813</span>
-                </h1>
-            </th>
-        </tr>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="./assets/images/favicon/favicon-32x32.png" width="30" height="30"
+             class="d-inline-block align-top" alt="brans-logo"
+        >
+        It's my brand
+    </a>
+    <a class="nav-item nav-link" href="#">Home</a>
+    <a class="nav-item nav-link" href="#">GitHub</a>
+</nav>
+<main role="main" class="container">
+    <div class="jumbotron">
+        <h1 class="text-center header-text">
+            <span data-melo="ig round-left">Ortiz</span>
+            <span data-melo="ig round-left1">Correa</span>
+            <span data-melo="ig round-right">Jose</span>
+            <span data-melo="ig round-right1">David</span>
+            - P3232 -
+            <span data-melo="ig weird-title">Var. 2813</span>
+        </h1>
+    </div>
 
-        <tr>
-            <td><canvas id="graph-canvas"></canvas></td>
-        </tr>
+    <div class="row">
+        <div class="col-sm">
+            <canvas id="graph-canvas"></canvas>
+        </div>
+        <div class="col-sm">
+            <form id="request-form">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">X:</label>
+                    <div class="col-sm-10" id="options_x"></div>
+                </div>
+                <div class="form-group row">
+                    <label for="y" class="col-sm-2 col-form-label">Y:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="y" name="y"
+                               class="form-control"
+                               placeholder="value in [-3..3]" oninput="validateInput()"
+                               onchange="validateInput()"
+                        >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="r" class="col-sm-2 col-form-label">R:</label>
+                    <div class="col-sm-10">
+                        <select name="r" class="form-control" id="r"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-form-label"></div>
+                    <div class="col-sm-10">
+                        <button type="submit" id="submit-btn" class="btn btn-dark" disabled>send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-        <tr>
-            <td>
-                <table class="form-table">
-                    <form id="request-form">
-                        <tr>
-                            <td class="form-control-title"><span>X: </span></td>
-                            <td><div id="options_x"></div></td>
-                        </tr>
-                        <tr>
-                            <td class="form-control-title"><span>Y: </span></td>
-                            <td>
-                                <input type="text" id="y" name="y"
-                                       class="form-control" form="request-form"
-                                       placeholder="value in [-5..3]" oninput="validateInput()"
-                                       onchange="validateInput()"
-                                >
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="form-control-title"><span>R: </span></td>
-                            <td><div id="options_r"></div></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><input type="submit" id="submit-btn" value="send" disabled></td>
-                        </tr>
-                    </form>
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <table class="results-table">
-                    <thead>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>R</th>
-                    <th>RESULT</th>
-                    <th>Current Time</th>
-                    <th>Computation Time</th>
-                    </thead>
-                    <tbody id="results_table_body">
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div>
+        <table class="table table-dark" id="results-table">
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>RESULT</th>
+                <th>Current Time</th>
+                <th>Computation Time</th>
+            </tr>
+            </thead>
+            <tbody id="results_table_body">
+            </tbody>
+        </table>
+    </div>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

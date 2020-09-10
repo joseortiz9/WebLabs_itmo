@@ -38,19 +38,19 @@ function drawCanvas() {
     //circle on the right up
     canvasCtx.beginPath();
     canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R, 0, -Math.PI / 2, true);
+    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R, -Math.PI / 2, -Math.PI, true);
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
 
     //square in the right down
-    canvasCtx.fillRect(getPhysicalX(0), getPhysicalY(0), R, R);
+    canvasCtx.fillRect(getPhysicalX(0)-R, getPhysicalY(0), R, R);
 
     //triangle
     canvasCtx.beginPath();
-    canvasCtx.moveTo(getPhysicalX(0)-R/2, getPhysicalY(0));
+    canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0)+R);
     canvasCtx.lineTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.lineTo(getPhysicalX(0), getPhysicalY(0)-R/2);
+    canvasCtx.lineTo(getPhysicalX(0)+R, getPhysicalY(0));
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
@@ -91,7 +91,7 @@ function drawCanvas() {
     canvasCtx.fillText('Y', getPhysicalX(0) - 10, maxY + limitMargin)
 
     // drawing tick marks
-    let valR = $("input[name='r']:checked").val();
+    let valR = $("select#r option:selected").val();
     const startTickX = width / 1.95, finishTickX = width / 2.05;
     const startTickY = height / 1.9, finishTickY = height / 2.1;
 

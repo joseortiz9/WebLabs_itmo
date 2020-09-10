@@ -1,48 +1,25 @@
-html {
+@font-face {
+    font-family: "title-font";
+    src: url("fonts/chaplin-type-font/title-jumbotron-font.ttf");
+}
+
+body {
     background: #1874d2;
     color: white;
 }
 
-main {
-    margin: auto 80px;
-    display: block;
-}
-@media(max-width: 800px) {
-    main {
-        margin: auto 50px;
-    }
-}
-
-main::after {
-    content: "nobody sees me!";
-    font-size: 10px;
-    font-style: italic;
-}
-
 #graph-canvas {
-    height: 30vh;
-    margin: auto;
-    display: block;
-}
-
-
-table.main-table {
     width: 100%;
-    border: 2px solid white;
-    border-collapse: collapse;
+    height: 35vh;
 }
 
-table.main-table tr {
-    border: 2px solid white;
-}
-
-
-.header-tr {
+.jumbotron {
+    margin-top: 30px;
     background-color: #55efc4;
     background-image: linear-gradient(315deg, #55efc4 0%, #000000 74%);
 }
 .header-text {
-    font-family: sans-serif;
+    font-family: 'title-font', sans-serif;
 }
 [data-melo~="ig"] {
     display: inline-block;
@@ -62,61 +39,3 @@ table.main-table tr {
 [data-melo~="round-right1"] {
     transform: rotate(5deg);
 }
-
-
-.form-table {
-    width: 100%;
-    font-size: 18px;
-    padding: 20px;
-    border-spacing: 8px;
-}
-
-.form-table tr td {
-    width: 50%;
-}
-
-.form-table tr td.form-control-title {
-    text-align: center;
-    font-weight: bold;
-}
-
-.form-table tr td:not(label) {
-    margin-left: 10px;
-}
-
-.form-table #submit-btn {
-    border-radius: 10px;
-    color: white;
-    border-color: green;
-    background-color: green;
-    font-size: 18px;
-    padding: 5px;
-}
-.form-table #submit-btn:disabled {
-    border-color: darkseagreen;
-    background-color: darkseagreen;
-}
-.form-table #submit-btn:hover {
-    opacity:.85;
-    cursor: pointer;
-    transform:scale(1.3,1.3);
-    -webkit-transform:scale(1.3,1.3);
-    -moz-transform:scale(1.3,1.3);
-}
-
-
-table.results-table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    text-align: center;
-    background-image: url(images/orcs_flying.gif);
-    background-size: 25%;
-    background-repeat: repeat;
-}
-table.results-table td {padding: 15px 12px;}
-table.results-table thead tr {font-weight: bold; border-top: 1px solid white;}
-table.results-table tbody tr:hover {background: dodgerblue; opacity: .5}
-table.results-table tbody tr td.green-row {background: rgba(0, 255, 0, 0.15);}
-table.results-table tbody tr td.red-row {background: rgba(255, 0, 0, 0.15);}
-table.results-table tbody tr td.column-limited {word-break: break-all;}
