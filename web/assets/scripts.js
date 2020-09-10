@@ -36,7 +36,7 @@ function validateRange(input, minRange) {
 function validateInput() {
     let validX = $('input:checkbox').filter(':checked').length > 0;
     let validY = validateRange($('input#y').val(), -3);
-    let validR = validateRange($('select#r option:selected'), 1);
+    let validR = validateRange($('select#r option:selected').val(), 1);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
@@ -47,7 +47,7 @@ function validateInput() {
 /*
 * send data async
 * */
-$('#request-form').submit(function (event) {
+/*$('#request-form').submit(function (event) {
     event.preventDefault();
     if (!validateInput()) {
         alert('at least one checkbox selected, the radio selected and a nice number for Y');
@@ -70,7 +70,7 @@ $('#request-form').submit(function (event) {
             console.log(response.RESULTS);
         }
     });
-});
+});*/
 
 
 function addToLocalStorage(item) {

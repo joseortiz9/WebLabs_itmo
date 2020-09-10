@@ -29,7 +29,7 @@
         It's my brand
     </a>
     <a class="nav-item nav-link" href="#">Home</a>
-    <a class="nav-item nav-link" href="#">GitHub</a>
+    <a class="nav-item nav-link" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
 </nav>
 <main role="main" class="container">
     <div class="jumbotron">
@@ -48,7 +48,8 @@
             <canvas id="graph-canvas"></canvas>
         </div>
         <div class="col-sm">
-            <form id="request-form">
+            <form id="request-form" method="GET" action="ControllerServlet">
+                <input type="hidden" name="go_home" value="0">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">X:</label>
                     <div class="col-sm-10" id="options_x"></div>
