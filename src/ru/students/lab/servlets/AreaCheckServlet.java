@@ -36,11 +36,13 @@ public class AreaCheckServlet extends HttpServlet {
         if (savedPoints == null)
             savedPoints = new ArrayList<>();
 
+        List<Point> newPoints = new ArrayList<>();
         for (double valX: x)
-            savedPoints.add(new Point(valX, y, r, start, String.valueOf(ChronoUnit.SECONDS.between(start, LocalDateTime.now()))));
+            newPoints.add(new Point(valX, y, r, start, String.valueOf(ChronoUnit.SECONDS.between(start, LocalDateTime.now()))));
 
+        savedPoints.addAll(newPoints);
         httpSession.setAttribute("savedPoints", savedPoints);
-        sendViewResponse(savedPoints, response);
+        sendViewResponse(newPoints, response);
     }
 
 

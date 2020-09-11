@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: joseortiz09
-  Date: 10.09.2020
-  Time: 3:20
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -42,6 +36,9 @@
             <span data-melo="ig weird-title">Var. 2813</span>
         </h1>
     </div>
+
+    <jsp:useBean id="errors" scope="request" class="java.lang.String"/>
+    ${errors}
 
     <div class="row">
         <div class="col-sm">
@@ -92,7 +89,17 @@
                 <th>Computation Time</th>
             </tr>
             </thead>
-            <tbody id="results_table_body">
+            <tbody>
+            <c:forEach var="point" items="${savedPoints}">
+                <tr>
+                    <td>${point.x}</td>
+                    <td class='column-limited'>${point.y}</td>
+                    <td>${point.r}</td>
+                    <td class="rowStyle">${point.result}</td>
+                    <td>${point.createdTime}</td>
+                    <td class='column-limited'>${point.computedTime}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

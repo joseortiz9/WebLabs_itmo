@@ -16,7 +16,7 @@ public class ControllerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //try {
+        try {
             if (request.getParameter("go_home").equals("1"))
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
@@ -24,10 +24,17 @@ public class ControllerServlet extends HttpServlet {
             double y = Double.parseDouble(request.getParameter("y"));
             double r = Double.parseDouble(request.getParameter("r"));
             getServletContext().getRequestDispatcher("/AreaCheckServlet").forward(request, response);
-        /*} catch (Exception e) {
+        } catch (NumberFormatException | NullPointerException e) {
+            String errors = "<div class=\"alert alert-danger\" role=\"alert\">\n" +
+                    "           <b>Errors:</b> problems validating data, you trying something weird, please check that: <br>\n" +
+                    "           <b>=></b> X in [-3;5] &emsp;<b>=></b> Y in [-3;3] &emsp;<b>=></b> R in [1;3]\n" +
+                    "       </div>";
+            request.setAttribute("errors", errors);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        } catch (Exception e) {
             PrintWriter writer = response.getWriter();
-            writer.write("=======> ERROR <======= \n" + Arrays.toString(e.getStackTrace()));
+            writer.write("=======> ERROR <======= \n" + e.getMessage());
             writer.close();
-        }*/
+        }
     }
 }

@@ -81,23 +81,6 @@ function addToLocalStorage(item) {
 }
 
 
-/*
-* Adding results to the table
-* */
-function addResultRow(response) {
-    let rowStyle = (response.result === 'true') ? 'green-row' : 'red-row';
-    $('.results-table #results_table_body').append(
-        "<tr>" +
-        "<td>" + response.x + "</td>" +
-        "<td class='column-limited'>" + response.y + "</td>" +
-        "<td>" + response.r + "</td>" +
-        "<td class="+ rowStyle +">" + response.result + "</td>" +
-        "<td>" + response.currentTime + "</td>" +
-        "<td class='column-limited'>" + response.computedTime + "</td>" +
-        "</tr>"
-    );
-}
-
 $(window).resize(drawCanvas)
 $(window).on("load", drawCanvas)
 $("select#r").change(drawCanvas)
