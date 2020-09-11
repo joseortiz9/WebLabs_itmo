@@ -23,11 +23,7 @@ public class ControllerServlet extends HttpServlet {
             double r = Double.parseDouble(request.getParameter("r"));
             getServletContext().getRequestDispatcher("/AreaCheckServlet").forward(request, response);
         } catch (NumberFormatException | NullPointerException e) {
-            String errors = "<div class=\"alert alert-danger\" role=\"alert\">\n" +
-                    "           <b>Errors:</b> problems validating data, you trying something weird, please check that: <br>\n" +
-                    "           <b>=></b> X in [-3;5] &emsp;<b>=></b> Y in [-3;3] &emsp;<b>=></b> R in [1;3]\n" +
-                    "       </div>";
-            request.setAttribute("errors", errors);
+            request.setAttribute("showErrors", "1");
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (Exception e) {
             PrintWriter writer = response.getWriter();

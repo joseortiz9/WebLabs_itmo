@@ -37,8 +37,14 @@
         </h1>
     </div>
 
-    <jsp:useBean id="errors" scope="request" class="java.lang.String"/>
-    ${errors}
+    <jsp:useBean id="showErrors" scope="request" class="java.lang.String"/>
+    <div id="error-banner"
+         class="alert alert-danger ${showErrors.equals("1") ? "d-block" : "d-none"}"
+         role="alert"
+    >
+        <b>Errors:</b> problems validating data, you trying something weird, please check that: <br>
+        <b>=></b> X in [-3;5] &emsp;<b>=></b> Y in [-3;3] &emsp;<b>=></b> R in [1;3]
+    </div>
 
     <div class="row">
         <div class="col-sm">

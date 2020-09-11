@@ -19,58 +19,51 @@ for (const number of valuesR) {
 /*
 * validate input
 * */
-function validateRange(input, minRange) {
+function validateRange(input, minRange, maxRange) {
     let val = parseFloat(input);
     if (isNaN(input))
         return false;
 
-    return (val >= minRange && val <= 3);
+    return (val >= minRange && val <= maxRange);
+}
+
+function validateValuesX(values) {
+    let allValid = true;
+    for (const val of values) {
+        if (!validateRange(val, -3, 5)) {
+            allValid = false;
+            break;
+        }
+    }
+    return values.length > 0 && allValid;
 }
 
 function validateInput() {
-    let validX = $('input:checkbox').filter(':checked').length > 0;
-    let validY = validateRange($('input#y').val(), -3);
-    let validR = validateRange($('select#r option:selected').val(), 1);
+    let validX = validateValuesX(Array.from($('input:checkbox').filter(':checked'), inp => inp.value));
+    let validY = validateRange($('input#y').val(), -3, 3);
+    let validR = validateRange($('select#r option:selected').val(), 1, 3);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
     return validX && validY && validR;
 }
 
-
 /*
-* send data async
+* Validate the input before executing the click
 * */
-/*$('#request-form').submit(function (event) {
-    event.preventDefault();
+$('button#submit-btn').click(function (event) {
     if (!validateInput()) {
-        alert('at least one checkbox selected, the radio selected and a nice number for Y');
-        return;
+        event.preventDefault();
+        $('#error-banner').removeClass("d-none").addClass("d-block");
+        throw Error("Validation Problem");
     }
-
-    let action = "handler.php";
-    let data = $(this).serialize();
-
-    $.post(action, data, function (response) {
-        if (response.RESULT_CODE === '0') {
-            drawCanvas();
-            response.RESULTS.map(item => {
-                addToLocalStorage(item);
-                addResultRow(item);
-                drawPoint(item.x, item.y, item.r);
-            });
-        } else {
-            alert(response.RESULTS);
-            console.log(response.RESULTS);
-        }
-    });
-});*/
+    $('#error-banner').removeClass("d-block").addClass("d-none");
+});
 
 
-
-$(window).resize(drawCanvas)
-$(window).on("load", drawCanvas)
+$(window).resize(drawCanvas);
+$(window).on("load", drawCanvas);
 $("select#r").change(function () {
-    drawCanvas();
     validateInput();
+    drawCanvas();
 });

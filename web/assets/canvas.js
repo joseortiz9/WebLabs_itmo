@@ -138,49 +138,76 @@ function drawCanvas() {
     canvasCtx.moveTo(getPhysicalX(0) - R / 2, startTickY);
     canvasCtx.lineTo(getPhysicalX(0) - R / 2, finishTickY);
     canvasCtx.stroke();
+
+    drawSavedPoints();
 }
 
 
-function drawPoint(x, y, r) {
+
+function getPointsByRows() {
+    let myRows = [];
+    $('#results-table tbody tr').each(function (index) {
+        myRows[index] = {};
+        $(this).find("td").each(function (cellIndex) {
+            myRows[index][$($("th")[cellIndex]).html()] = $(this).html();
+        });
+    });
+    return myRows;
+}
+
+function drawSavedPoints() {
+    let valR = $("select#r option:selected").val();
+    let savedTablePoints = getPointsByRows();
+    if (savedTablePoints == null)
+        return;
+
+    for (const i in savedTablePoints) {
+        let color = (savedTablePoints[i].RESULT == "true") ? "green" : "red";
+        drawPoint(savedTablePoints[i].X, savedTablePoints[i].Y, valR, color);
+    }
+}
+
+
+
+function drawPoint(x, y, r, color = "red") {
     let R = height / 3 / r;
 
     canvasCtx.beginPath();
     canvasCtx.moveTo((width / 2) + R * x, (height / 2) - R * y);
     canvasCtx.arc((width / 2) + R * x, (height / 2) - R * y, width/300,0,2*Math.PI);
     canvasCtx.closePath();
-    canvasCtx.strokeStyle = "red";
-    canvasCtx.fillStyle = "red";
+    canvasCtx.strokeStyle = color;
+    canvasCtx.fillStyle = color;
     canvasCtx.fill();
     canvasCtx.stroke();
 }
 
+
 $('#graph-canvas').click(function (event) {
-    //try {
+    try {
         let valR = $("select#r option:selected").val();
         let physicR = height / 3 / valR;
         const clickedX = (getMousePos(event).X - width/2) / physicR;
         const clickedY = (-getMousePos(event).Y + height/2) / physicR;
 
-        console.log(clickedX, clickedY, getMousePos(event).X, getMousePos(event).Y);
-
-        drawPoint(clickedX, clickedY, valR);
-
         $('#options_x')
             .append(`<div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="${clickedX}" name="x[]" value="${clickedX}" checked>
-                        <label class="form-check-label" for="${clickedX}">${clickedX}</label>
-                    </div>`);
+                    <input class="form-check-input" type="checkbox" id="${clickedX}" name="x[]" value="${clickedX}" checked>
+                    <label class="form-check-label" for="${clickedX}">${clickedX}</label>
+                </div>`);
         $("input#y").val(clickedY);
-        //$("#submit")[0].click()
-    /*} catch (e) {
-        alert("Невозможно определить координаты точки")
-    }*/
+        $('button#submit-btn').click();
+        drawPoint(clickedX, clickedY, valR);
+    } catch (e) {
+        console.log(e.toLocaleString());
+    }
 });
 
 function getMousePos(evt) {
     let rect = $('#graph-canvas')[0].getBoundingClientRect();
     return {
-        X: evt.clientX - rect.left,
-        Y: evt.clientY - rect.top
+        X: 300*(evt.clientX - rect.left)/rect.width,
+        Y: 150*(evt.clientY - rect.top)/rect.height
     };
+
 }
