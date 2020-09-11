@@ -3,9 +3,15 @@
     src: url("fonts/chaplin-type-font/title-jumbotron-font.ttf");
 }
 
-body {
+html {
     background: #1874d2;
+}
+
+body {
     color: white;
+    background-image: url(images/orcs_flying.gif);
+    background-size: 25%;
+    background-repeat: repeat;
 }
 
 #graph-canvas {
@@ -39,3 +45,18 @@ body {
 [data-melo~="round-right1"] {
     transform: rotate(5deg);
 }
+
+div.custom-card {
+    position: relative;
+    min-width: 0;
+    background-color: rgba(163, 163, 163, 0.7);
+    background-clip: border-box;
+    border: 3px solid rgb(0, 83, 161);
+    border-radius: .40rem;
+    padding: 10px;
+}
+
+table#results-table {margin-top: 30px;}
+table#results-table tbody tr td.green-row {background: rgba(0, 255, 0, 0.15);}
+table#results-table tbody tr td.red-row {background: rgba(255, 0, 0, 0.15);}
+table#results-table tbody tr td.column-limited {word-break: break-all;}

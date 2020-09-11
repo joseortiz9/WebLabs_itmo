@@ -12,14 +12,12 @@ import java.util.Arrays;
 @WebServlet(name = "ControllerServlet")
 public class ControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        if (request.getParameter("go_home").equals("1"))
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (request.getParameter("go_home").equals("1"))
-                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-
             double[] x = Arrays.stream(request.getParameterValues("x[]")).mapToDouble(Double::parseDouble).toArray();
             double y = Double.parseDouble(request.getParameter("y"));
             double r = Double.parseDouble(request.getParameter("r"));

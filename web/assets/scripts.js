@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    if (localStorage.getItem("results") != null) {
-        let localData = JSON.parse(localStorage.getItem("results"));
-        localData.map(item => addResultRow(item));
-    }
-});
 
 /*
 * Filling the X and R inputs
@@ -73,14 +67,10 @@ function validateInput() {
 });*/
 
 
-function addToLocalStorage(item) {
-    let localData = localStorage.getItem("results");
-    localData = localData ? JSON.parse(localData) : [];
-    localData.push(item);
-    localStorage.setItem("results", JSON.stringify(localData));
-}
-
 
 $(window).resize(drawCanvas)
 $(window).on("load", drawCanvas)
-$("select#r").change(drawCanvas)
+$("select#r").change(function () {
+    drawCanvas();
+    validateInput();
+});

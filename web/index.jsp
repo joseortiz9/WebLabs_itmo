@@ -22,7 +22,7 @@
         >
         It's my brand
     </a>
-    <a class="nav-item nav-link" href="#">Home</a>
+    <a class="nav-item nav-link" href="index.jsp">Home</a>
     <a class="nav-item nav-link" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
 </nav>
 <main role="main" class="container">
@@ -42,43 +42,46 @@
 
     <div class="row">
         <div class="col-sm">
+            <div class="custom-card">
             <canvas id="graph-canvas"></canvas>
+            </div>
         </div>
         <div class="col-sm">
-            <form id="request-form" method="GET" action="ControllerServlet">
-                <input type="hidden" name="go_home" value="0">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">X:</label>
-                    <div class="col-sm-10" id="options_x"></div>
-                </div>
-                <div class="form-group row">
-                    <label for="y" class="col-sm-2 col-form-label">Y:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="y" name="y"
-                               class="form-control"
-                               placeholder="value in [-3..3]" oninput="validateInput()"
-                               onchange="validateInput()"
-                        >
+            <div class="custom-card">
+                <form id="request-form" method="GET" action="ControllerServlet">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">X:</label>
+                        <div class="col-sm-10" id="options_x"></div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="r" class="col-sm-2 col-form-label">R:</label>
-                    <div class="col-sm-10">
-                        <select name="r" class="form-control" id="r"></select>
+                    <div class="form-group row">
+                        <label for="y" class="col-sm-2 col-form-label">Y:</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="y" name="y"
+                                   class="form-control"
+                                   placeholder="value in [-3..3]" oninput="validateInput()"
+                                   onchange="validateInput()"
+                            >
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-2 col-form-label"></div>
-                    <div class="col-sm-10">
-                        <button type="submit" id="submit-btn" class="btn btn-dark" disabled>send</button>
+                    <div class="form-group row">
+                        <label for="r" class="col-sm-2 col-form-label">R:</label>
+                        <div class="col-sm-10">
+                            <select name="r" class="form-control" id="r"></select>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group row">
+                        <div class="col-sm-2 col-form-label"></div>
+                        <div class="col-sm-10">
+                            <button type="submit" id="submit-btn" class="btn btn-dark" disabled>send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <div>
-        <table class="table table-dark" id="results-table">
+        <table class="table table-striped table-hover table-dark text-center" id="results-table">
             <thead>
             <tr>
                 <th>X</th>
@@ -90,12 +93,13 @@
             </tr>
             </thead>
             <tbody>
+            <jsp:useBean id="savedPoints" scope="session" class="java.util.ArrayList"/>
             <c:forEach var="point" items="${savedPoints}">
                 <tr>
                     <td>${point.x}</td>
                     <td class='column-limited'>${point.y}</td>
                     <td>${point.r}</td>
-                    <td class="rowStyle">${point.result}</td>
+                    <td class="${(point.result) ? "green-row" : "red-row"}">${point.result}</td>
                     <td>${point.createdTime}</td>
                     <td class='column-limited'>${point.computedTime}</td>
                 </tr>

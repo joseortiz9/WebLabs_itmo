@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "AreaCheckServlet")
@@ -24,7 +25,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LocalDateTime start = LocalDateTime.now();
+        long start = System.currentTimeMillis();
 
         HttpSession httpSession = request.getSession();
 
@@ -37,8 +38,11 @@ public class AreaCheckServlet extends HttpServlet {
             savedPoints = new ArrayList<>();
 
         List<Point> newPoints = new ArrayList<>();
-        for (double valX: x)
-            newPoints.add(new Point(valX, y, r, start, String.valueOf(ChronoUnit.SECONDS.between(start, LocalDateTime.now()))));
+        for (double valX: x) {
+            LocalDateTime createdAt = millsToLocalDateTime(start);
+            String computedTime = ((double) (System.currentTimeMillis() - start) / 1e3) + "S";
+            newPoints.add(new Point(valX, y, r, createdAt, computedTime));
+        }
 
         savedPoints.addAll(newPoints);
         httpSession.setAttribute("savedPoints", savedPoints);
@@ -76,7 +80,7 @@ public class AreaCheckServlet extends HttpServlet {
                 "        >\n" +
                 "        It's my brand\n" +
                 "    </a>\n" +
-                "    <a class=\"nav-item nav-link\" href=\"#\">Home</a>\n" +
+                "    <a class=\"nav-item nav-link\" href=\"index.jsp\">Home</a>\n" +
                 "    <a class=\"nav-item nav-link\" href=\"https://github.com/joseortiz9/WebLabs_itmo\">GitHub</a>\n" +
                 "</nav>\n" +
                 "<main role=\"main\" class=\"container\">\n" +
@@ -86,6 +90,7 @@ public class AreaCheckServlet extends HttpServlet {
             String title = (point.isResult()) ? "Inside!" : "Outside!";
             String bgStyle = (point.isResult()) ? "success" : "danger";
             HTMLResponse.append(
+                    "<div class=\"col-sm-3\">" +
                     "<div class=\"card text-white bg-" + bgStyle + " mb-3\" style=\"max-width: 18rem;\">\n" +
                     "    <div class=\"card-header\">" + title + "</div>\n" +
                     "    <div class=\"card-body\">\n" +
@@ -98,6 +103,7 @@ public class AreaCheckServlet extends HttpServlet {
                     "            <span><b>ComputedTime:</b> " + point.getComputedTime() + "</span>\n" +
                     "        </p>\n" +
                     "    </div>\n" +
+                    "</div>\n" +
                     "</div>\n"
             );
         }
@@ -106,7 +112,7 @@ public class AreaCheckServlet extends HttpServlet {
                 "            <div class=\"row\">\n" +
                 "                <div class=\"col-sm-4\"></div>\n" +
                 "                <div class=\"col-sm-4\">\n" +
-                "                    <form method=\"GET\" action=\"ControllerServlet\">" +
+                "                    <form method=\"POST\" action=\"ControllerServlet\">" +
                 "                       <input type=\"hidden\" name=\"go_home\" value=\"1\">" +
                 "                       <button type=\"submit\" class=\"btn btn-dark btn-lg btn-block\">Go back</button>" +
                 "                    </form>\n" +
@@ -123,5 +129,10 @@ public class AreaCheckServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.write(HTMLResponse.toString());
         out.close();
+    }
+
+    public LocalDateTime millsToLocalDateTime(long millis) {
+        Instant instant = Instant.ofEpochMilli(millis);
+        return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }
