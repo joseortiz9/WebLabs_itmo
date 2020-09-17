@@ -29,7 +29,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         HttpSession httpSession = request.getSession();
 
-        double[] x = Arrays.stream(request.getParameterValues("x[]")).mapToDouble(Double::parseDouble).toArray();
+        double x = Double.parseDouble(request.getParameter("x"));
         double y = Double.parseDouble(request.getParameter("y"));
         double r = Double.parseDouble(request.getParameter("r"));
 
@@ -37,20 +37,16 @@ public class AreaCheckServlet extends HttpServlet {
         if (savedPoints == null)
             savedPoints = new ArrayList<>();
 
-        List<Point> newPoints = new ArrayList<>();
-        for (double valX: x) {
-            LocalDateTime createdAt = millsToLocalDateTime(start);
-            String computedTime = ((double) (System.currentTimeMillis() - start) / 1e3) + "S";
-            newPoints.add(new Point(valX, y, r, createdAt, computedTime));
-        }
-
-        savedPoints.addAll(newPoints);
+        LocalDateTime createdAt = millsToLocalDateTime(start);
+        String computedTime = ((double) (System.currentTimeMillis() - start) / 1e3) + "S";
+        Point point = new Point (x, y, r, createdAt, computedTime);
+        savedPoints.add(point);
         httpSession.setAttribute("savedPoints", savedPoints);
-        sendViewResponse(newPoints, response);
+        sendViewResponse(point, response);
     }
 
 
-    private void sendViewResponse(List<Point> points, HttpServletResponse response) throws IOException {
+    private void sendViewResponse(Point point, HttpServletResponse response) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         StringBuilder HTMLResponse = new StringBuilder("<html lang=\"en\">\n" +
@@ -86,7 +82,6 @@ public class AreaCheckServlet extends HttpServlet {
                 "<main role=\"main\" class=\"container\">\n" +
                 "    <div class=\"row\">\n");
 
-        for(Point point: points) {
             String title = (point.isResult()) ? "Inside!" : "Outside!";
             String bgStyle = (point.isResult()) ? "success" : "danger";
             HTMLResponse.append(
@@ -106,7 +101,6 @@ public class AreaCheckServlet extends HttpServlet {
                     "</div>\n" +
                     "</div>\n"
             );
-        }
 
         HTMLResponse.append("<div class=\"col-sm-12\">\n" +
                 "            <div class=\"row\">\n" +

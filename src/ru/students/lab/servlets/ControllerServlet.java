@@ -18,7 +18,7 @@ public class ControllerServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            double[] x = Arrays.stream(request.getParameterValues("x[]")).mapToDouble(Double::parseDouble).toArray();
+            double x = Double.parseDouble(request.getParameter("x"));
             double y = Double.parseDouble(request.getParameter("y"));
             double r = Double.parseDouble(request.getParameter("r"));
             getServletContext().getRequestDispatcher("/AreaCheckServlet").forward(request, response);

@@ -2,19 +2,22 @@
 /*
 * Filling the X and R inputs
 * */
-const valuesX = ['-3', '-2', '-1', '0', '1', '2', '3', '4', '5'];
-const valuesR = ['1', '1.5', '2', '2.5', '3'];
+const valuesX = [ '-4', '3', '-2', '-1', '0', '1', '2', '3', '4'];
+const valuesR = ['1', '2', '3', '4', '5'];
 for (const number of valuesX) {
-    $('#options_x')
+    $('#x')
         .append(`<div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="${number}" name="x[]" value="${number}">
+                    <input class="form-check-input" type="radio" id="${number}" name="x" value="${number}" checked>
                     <label class="form-check-label" for="${number}">${number}</label>
                  </div>`);
 }
 for (const number of valuesR) {
-    $('select#r').append(`<option value="${number}" ${(number==='1') ? 'selected' : ''}/>${number}</option>`);
+    $('#r')
+        .append(`<div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="${number}" name="r" value="${number}" checked>
+                    <label class="form-check-label" for="${number}">${number}</label>
+                 </div>`);
 }
-
 
 /*
 * validate input
@@ -27,21 +30,10 @@ function validateRange(input, minRange, maxRange) {
     return (val >= minRange && val <= maxRange);
 }
 
-function validateValuesX(values) {
-    let allValid = true;
-    for (const val of values) {
-        if (!validateRange(val, -3, 5)) {
-            allValid = false;
-            break;
-        }
-    }
-    return values.length > 0 && allValid;
-}
-
 function validateInput() {
-    let validX = validateValuesX(Array.from($('input:checkbox').filter(':checked'), inp => inp.value));
-    let validY = validateRange($('input#y').val(), -3, 3);
-    let validR = validateRange($('select#r option:selected').val(), 1, 3);
+    let validX = validateRange($('input#x').is(':checked').val(), -4, 4);
+    let validY = validateRange($('input#y').val(), -3, 5);
+    let validR = validateRange($('input#r').is(':checked').val(), 1, 5);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
@@ -63,7 +55,7 @@ $('button#submit-btn').click(function (event) {
 
 $(window).resize(drawCanvas);
 $(window).on("load", drawCanvas);
-$("select#r").change(function () {
+$("input#r").change(function () {
     validateInput();
     drawCanvas();
 });

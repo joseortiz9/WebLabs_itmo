@@ -57,22 +57,21 @@
                 <form id="request-form" method="GET" action="ControllerServlet">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">X:</label>
-                        <div class="col-sm-10" id="options_x"></div>
+                        <div class="col-sm-10" id="x"></div>
                     </div>
                     <div class="form-group row">
                         <label for="y" class="col-sm-2 col-form-label">Y:</label>
                         <div class="col-sm-10">
                             <input type="text" id="y" name="y"
                                    class="form-control"
-                                   placeholder="value in [-3..3]" oninput="validateInput()"
+                                   placeholder="value in [-3..5]" oninput="validateInput()"
                                    onchange="validateInput()"
                             >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="r" class="col-sm-2 col-form-label">R:</label>
-                        <div class="col-sm-10">
-                            <select name="r" class="form-control" id="r"></select>
+                        <div class="col-sm-10" id = "r">
                         </div>
                     </div>
                     <div class="form-group row">
