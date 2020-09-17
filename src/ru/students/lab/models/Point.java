@@ -32,9 +32,9 @@ public class Point {
         if (x == null || y == null || r == null)
             throw new NullPointerException();
 
-        this.result = (x >= 0 && y <= 0 && y >= (x - r)) //linear function
-                || (y >= 0 && x <= 0 && y <= Math.sqrt(r * r - x * x)) //circular function
-                || (y <= 0 && x <= 0 && y >= -r && x >= -r); //lines on r
+        this.result = (x <= 0 && y >= 0 && y <= 2*x + r) //linear function
+                || (y <= 0 && x >= 0 && y >= -Math.sqrt(r * r / 4 - x * x)) //circular function
+                || (y >= 0 && x >= 0 && y <= r && x <= r); //lines on r
     }
 
     public double getX() {

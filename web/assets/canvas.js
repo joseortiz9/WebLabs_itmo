@@ -35,22 +35,22 @@ function drawCanvas() {
     canvasCtx.strokeStyle = "rgba(255,255,255,0.8)";
     canvasCtx.fillStyle = "rgba(255,255,255,0.8)";
 
-    //circle on the right up
+    //circle on the right down
     canvasCtx.beginPath();
     canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R, -Math.PI / 2, -Math.PI, true);
+    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R/2, Math.PI/2, 0, true);
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
 
-    //square in the right down
-    canvasCtx.fillRect(getPhysicalX(0)-R, getPhysicalY(0), R, R);
+    //square in the right up
+    canvasCtx.fillRect(getPhysicalX(0), getPhysicalY(0) - R, R, R);
 
     //triangle
     canvasCtx.beginPath();
-    canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0)+R);
+    canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0)-R);
     canvasCtx.lineTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.lineTo(getPhysicalX(0)+R, getPhysicalY(0));
+    canvasCtx.lineTo(getPhysicalX(0)-R/2, getPhysicalY(0));
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
@@ -91,7 +91,8 @@ function drawCanvas() {
     canvasCtx.fillText('Y', getPhysicalX(0) - 10, maxY + limitMargin)
 
     // drawing tick marks
-    let valR = $("select#r option:selected").val();
+    let valR = $('input[name="r"] :checked').val();
+    console.log(valR);
     const startTickX = width / 1.95, finishTickX = width / 2.05;
     const startTickY = height / 1.9, finishTickY = height / 2.1;
 
