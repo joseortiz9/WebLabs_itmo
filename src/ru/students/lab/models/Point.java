@@ -1,6 +1,7 @@
 package ru.students.lab.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Point {
     private final Double x;
@@ -53,11 +54,20 @@ public class Point {
         return createdTime;
     }
 
+    public String getCreatedTimeFormatted() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return createdTime.format(formatter);
+    }
+
     public String getComputedTime() {
         return computedTime;
     }
 
-    public boolean isResult() {
+    public String getComputedTimeFormatted() {
+        return computedTime;
+    }
+
+    public boolean getResult() {
         return result;
     }
 }
