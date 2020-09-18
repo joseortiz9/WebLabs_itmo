@@ -91,8 +91,7 @@ function drawCanvas() {
     canvasCtx.fillText('Y', getPhysicalX(0) - 10, maxY + limitMargin)
 
     // drawing tick marks
-    let valR = $('input[name="r"] :checked').val();
-    console.log(valR);
+    let valR = $('input[name="r"]:checked').val();
     const startTickX = width / 1.95, finishTickX = width / 2.05;
     const startTickY = height / 1.9, finishTickY = height / 2.1;
 
@@ -157,7 +156,7 @@ function getPointsByRows() {
 }
 
 function drawSavedPoints() {
-    let valR = $("select#r option:selected").val();
+    let valR = $('input[name="r"]:checked').val();
     let savedTablePoints = getPointsByRows();
     if (savedTablePoints == null)
         return;
@@ -186,14 +185,14 @@ function drawPoint(x, y, r, color = "red") {
 
 $('#graph-canvas').click(function (event) {
     try {
-        let valR = $("select#r option:selected").val();
+        let valR = $('input[name="r"]:checked').val();
         let physicR = height / 3 / valR;
         const clickedX = (getMousePos(event).X - width/2) / physicR;
         const clickedY = (-getMousePos(event).Y + height/2) / physicR;
 
-        $('#options_x')
+        $('input[name="x"]')
             .append(`<div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="${clickedX}" name="x[]" value="${clickedX}" checked>
+                    <input class="form-check-input" type="radio" id="${clickedX}" name="x" value="${clickedX}" checked>
                     <label class="form-check-label" for="${clickedX}">${clickedX}</label>
                 </div>`);
         $("input#y").val(clickedY);
