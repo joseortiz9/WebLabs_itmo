@@ -7,14 +7,14 @@ const valuesR = ['1', '2', '3', '4', '5'];
 for (const number of valuesX) {
     $('#x')
         .append(`<div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="${number}" name="x" value="${number}" checked>
+                    <input class="form-check-input" type="radio" id="${number}" name="x" value="${number}" ${number === '1' ?  "checked" : ""}>
                     <label class="form-check-label" for="${number}">${number}</label>
                  </div>`);
 }
 for (const number of valuesR) {
     $('#r')
         .append(`<div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="${number}" name="r" value="${number}" checked>
+                    <input class="form-check-input" type="radio" id="${number}" name=r value="${number}" ${number === '1' ?  "checked" : ""}>
                     <label class="form-check-label" for="${number}">${number}</label>
                  </div>`);
 }
@@ -31,9 +31,9 @@ function validateRange(input, minRange, maxRange) {
 }
 
 function validateInput() {
-    let validX = validateRange($('input#x').is(':checked').val(), -4, 4);
+    let validX = validateRange($('input[name="x"]:checked').val(), -4, 4);
     let validY = validateRange($('input#y').val(), -3, 5);
-    let validR = validateRange($('input#r').is(':checked').val(), 1, 5);
+    let validR = validateRange($('input[name="r"]:checked').val(), 1, 5);
 
     $('#submit-btn').attr('disabled', !(validX && validY && validR));
 
@@ -55,7 +55,7 @@ $('button#submit-btn').click(function (event) {
 
 $(window).resize(drawCanvas);
 $(window).on("load", drawCanvas);
-$("input#r").change(function () {
+$("input[name=r]").change(function () {
     validateInput();
     drawCanvas();
 });

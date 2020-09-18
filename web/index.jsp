@@ -29,11 +29,12 @@
     <div class="jumbotron">
         <h1 class="text-center header-text">
             <span data-melo="ig round-left">Ortiz</span>
-            <span data-melo="ig round-left1">Correa</span>
-            <span data-melo="ig round-right">Jose</span>
-            <span data-melo="ig round-right1">David</span>
+            <span data-melo="ig round-right">Jose</span> -
+            <span data-melo="ig round-left1">Tarasova</span>
+            <span data-melo="ig round-right1">Natasha</span>
+            <br>
             - P3232 -
-            <span data-melo="ig weird-title">Var. 2813</span>
+            <span data-melo="ig weird-title">Var. 2829</span>
         </h1>
     </div>
 
@@ -43,7 +44,7 @@
          role="alert"
     >
         <b>Errors:</b> problems validating data, you trying something weird, please check that: <br>
-        <b>=></b> X in [-3;5] &emsp;<b>=></b> Y in [-3;3] &emsp;<b>=></b> R in [1;3]
+        <b>=></b> X in [-4;4] &emsp;<b>=></b> Y in [-3;5] &emsp;<b>=></b> R in [1;5]
     </div>
 
     <div class="row">
