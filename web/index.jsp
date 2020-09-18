@@ -106,8 +106,8 @@
                     <td class='column-limited'>${point.y}</td>
                     <td>${point.r}</td>
                     <td class="${(point.result) ? "green-row" : "red-row"}">${point.result}</td>
-                    <td>${point.createdTime}</td>
-                    <td class='column-limited'>${point.computedTime}</td>
+                    <td>${point.createdTimeFormatted}</td>
+                    <td class='column-limited'>${point.computedTimeFormatted}</td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -25,8 +25,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long start = System.currentTimeMillis();
-
+        LocalDateTime start = LocalDateTime.now();
         HttpSession httpSession = request.getSession();
 
         double x = Double.parseDouble(request.getParameter("x"));
@@ -37,19 +36,12 @@ public class AreaCheckServlet extends HttpServlet {
         if (savedPoints == null)
             savedPoints = new ArrayList<>();
 
-        LocalDateTime createdAt = millsToLocalDateTime(start);
-        String computedTime = ((double) (System.currentTimeMillis() - start) / 1e3) + "S";
-        Point point = new Point (x, y, r, createdAt, computedTime);
+        double computedTime = (double) Duration.between(start, LocalDateTime.now()).toMillis();
+        Point point = new Point (x, y, r, start, computedTime);
         savedPoints.add(point);
         httpSession.setAttribute("savedPoints", savedPoints);
 
-
         request.setAttribute("addedPoint", point);
         getServletContext().getRequestDispatcher("/response.jsp").forward(request, response);
-    }
-
-    public LocalDateTime millsToLocalDateTime(long millis) {
-        Instant instant = Instant.ofEpochMilli(millis);
-        return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

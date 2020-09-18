@@ -1,5 +1,6 @@
 package ru.students.lab.models;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,9 +10,9 @@ public class Point {
     private final Double r;
     private Boolean result;
     private final LocalDateTime createdTime;
-    private final String computedTime;
+    private final Double computedTime;
 
-    public Point(double x, double y, double r, LocalDateTime createdTime, String computedTime) {
+    public Point(double x, double y, double r, LocalDateTime createdTime, double computedTime) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -20,7 +21,7 @@ public class Point {
         checkInsideFunc();
     }
 
-    public Point(double x, double y, double r, boolean result, LocalDateTime createdTime, String computedTime) {
+    public Point(double x, double y, double r, boolean result, LocalDateTime createdTime, double computedTime) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -59,12 +60,12 @@ public class Point {
         return createdTime.format(formatter);
     }
 
-    public String getComputedTime() {
+    public double getComputedTime() {
         return computedTime;
     }
 
     public String getComputedTimeFormatted() {
-        return computedTime;
+        return (computedTime / 1e3) + "S";
     }
 
     public boolean getResult() {
