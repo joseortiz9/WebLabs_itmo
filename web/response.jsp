@@ -30,10 +30,9 @@
     <a class="nav-item nav-link" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
 </nav>
 <main role="main" class="container">
-    <div class="row">
         <jsp:useBean id="addedPoint" scope="request" class="ru.students.lab.models.Point"/>
-        <div class="col-sm-3">
-            <div class="card text-white bg-${(addedPoint.result) ? "success" : "danger"} bgStyle mb-3" style="max-width: 18rem;">
+        <div class="d-flex justify-content-center">
+            <div class="card text-white bg-${(addedPoint.result) ? "success" : "danger"} bgStyle mb-3" style="max-width: 20rem;">
                 <div class="card-header">${(addedPoint.result) ? "Inside!" : "Outside!"}</div>
                 <div class="card-body">
                     <h5 class="card-title">Point:</h5>
@@ -48,16 +47,9 @@
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <a href="index.jsp" class="btn btn-dark btn-lg btn-block">Go back</a>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
+        <div class="d-flex justify-content-center">
+            <a href="index.jsp" class="btn btn-dark btn-lg btn-block">Go back</a>
         </div>
-    </div>
 </main>
 </body>
 </html>
