@@ -21,6 +21,6 @@
 * Правила навигации между страницами приложения должны быть заданы в отдельном конфигурационном файле.
 
 Take a look: 
-- In order to run the lab is necessary to run WildFly on helios from my folder /s288867/wildfly-20.0.1.Final/bin/standalone.sh
+- In order to run the ru.students.lab is necessary to run WildFly on helios from my folder /s288867/wildfly-20.0.1.Final/bin/standalone.sh
 - Make a port forwarding with helios on 11000
 - now is possible to check it on http://0.0.0.0:11000/weblab3 depending on to which local port was forwarded

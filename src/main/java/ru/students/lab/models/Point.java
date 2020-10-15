@@ -1,33 +1,39 @@
 package ru.students.lab.models;
 
-import java.time.Duration;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Point {
-    private final Double x;
-    private final Double y;
-    private final Double r;
-    private Boolean result;
-    private final LocalDateTime createdTime;
-    private final Double computedTime;
+@Entity
+@Table(name = "points", catalog = "studs")
+public @Data class Point implements Serializable {
 
-    public Point(double x, double y, double r, LocalDateTime createdTime, double computedTime) {
-        this.x = x;
-        this.y = y;
-        this.r = r;
-        this.createdTime = createdTime;
-        this.computedTime = computedTime;
-        checkInsideFunc();
+    @Setter(value = AccessLevel.NONE)
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private Double x;
+    private Double y;
+    private Double r;
+    private Boolean result;
+    private LocalDateTime createTime;
+
+    public Point() {
     }
 
-    public Point(double x, double y, double r, boolean result, LocalDateTime createdTime, double computedTime) {
+    public Point(double x, double y, double r, boolean result, LocalDateTime createTime) {
         this.x = x;
         this.y = y;
         this.r = r;
         this.result = result;
-        this.createdTime = createdTime;
-        this.computedTime = computedTime;
+        this.createTime = createTime;
     }
 
     public void checkInsideFunc() {
@@ -39,36 +45,8 @@ public class Point {
                 || (y >= 0 && x >= 0 && y <= r && x <= r); //lines on r
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public LocalDateTime getCreatedTime() {
-        return createdTime;
-    }
-
     public String getCreatedTimeFormatted() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return createdTime.format(formatter);
-    }
-
-    public double getComputedTime() {
-        return computedTime;
-    }
-
-    public String getComputedTimeFormatted() {
-        return (computedTime / 1e3) + "S";
-    }
-
-    public boolean getResult() {
-        return result;
+        return createTime.format(formatter);
     }
 }

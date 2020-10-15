@@ -9,8 +9,5 @@
         <module name="WebLabs_itmo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="WebLabs_itmo" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
