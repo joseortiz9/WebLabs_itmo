@@ -40,26 +40,12 @@
             <version>7.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.icefaces/icefaces -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.icefaces</groupId>
             <artifactId>icefaces</artifactId>
             <version>4.3.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.icefaces/icefaces-ace -->
-        <dependency>
-            <groupId>org.icefaces</groupId>
-            <artifactId>icefaces-ace</artifactId>
-            <version>4.3.0</version>
-            <type>pom</type>
-        </dependency>
+        </dependency>-->
 
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.14</version>
-            <scope>provided</scope>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>

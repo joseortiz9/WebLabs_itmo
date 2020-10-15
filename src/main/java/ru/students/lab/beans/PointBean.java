@@ -4,12 +4,13 @@ import ru.students.lab.dao.PointDao;
 import ru.students.lab.models.Point;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "userBean")
-@ViewScoped
+@ManagedBean(name = "pointBean")
+@SessionScoped
 public class PointBean implements Serializable {
 
     private PointDao pointDao = new PointDao();
@@ -17,11 +18,19 @@ public class PointBean implements Serializable {
     private Point point;
 
     public PointBean() {
+        pointsList = new ArrayList<>();
+        point = new Point();
     }
 
     public List<Point> getSavedPoints() {
         pointsList = pointDao.getPoints();
         return pointsList;
+    }
+
+    public void addPoint() {
+        point.checkInsideFunc();
+        pointDao.add(point);
+        point = new Point();
     }
 
     public List<Point> getPointsList() {

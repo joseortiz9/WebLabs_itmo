@@ -2,16 +2,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:ace="http://www.icefaces.org/icefaces/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <h:head>
-    <title>Weblab8</title>
+    <title>Weblab3</title>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" />
 </h:head>
+
 <h:body>
-    <p:inputText id="x" value="#{point.x}" disabled="true" />
-    <p:slider for="x" minValue="-5" maxValue="5" step="1" />
+    <h1>Lab3</h1>
+    <h:form>
+        <p>X:
+            <p:inputNumber id="x" value="#{pointBean.point.x}" required="true" />
+            <p:slider for="x" minValue="-5" maxValue="5" step="1" style="max-width: 300px"/>
+        </p>
+        <p>Y: <p:inputNumber id="y" value="#{pointBean.point.y}" required="true"/></p>
+        <p>R: <p:inputNumber id="r" value="#{pointBean.point.r}" minValue="1" maxValue="5" autocomplete="off" required="true"/></p>
+        <p:commandButton type="submit" update=":table_form:results_table" value="add" action="#{pointBean.addPoint()}" />
+    </h:form>
+
+
+    <h:form id="table_form">
+        <h:dataTable id="results_table" value="#{pointBean.savedPoints}" var="point">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{point.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{point.x}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{point.y}
+            </h:column>
+            <h:column>
+                <f:facet name="header">result</f:facet>
+                #{point.result}
+            </h:column>
+            <h:column>
+                <f:facet name="header">creation time</f:facet>
+                #{point.createTime}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
 </h:body>
 </html>
