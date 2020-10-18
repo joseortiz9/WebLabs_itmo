@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import ru.students.lab.models.Point;
 
 public class HibernateUtil {
 
@@ -16,6 +17,7 @@ public class HibernateUtil {
             configuration.configure("hibernate.cfg.xml");
 
             System.out.println("Hibernate Annotation Configuration loaded");
+            configuration.addAnnotatedClass(Point.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             System.out.println("Hibernate Annotation serviceRegistry created");
 

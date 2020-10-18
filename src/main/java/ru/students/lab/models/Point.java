@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
-@Table(name = "points", catalog = "studs")
+@Table(name = "points", schema = "s288867", catalog = "orbis")
 public class Point implements Serializable {
 
     private static final long serialVersionUID = 1L;

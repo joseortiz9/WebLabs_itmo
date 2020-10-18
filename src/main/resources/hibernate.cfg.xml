@@ -4,7 +4,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:studs</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orbis</property>
         <property name="hibernate.connection.username">s288867</property>
         <property name="hibernate.connection.password">qfb977</property>
         <property name="hibernate.connection.pool_size">10</property>
@@ -12,6 +12,7 @@
         <property name="dialect">org.hibernate.dialect.Oracle8iDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="ru.students.lab.models.Point" />
+        <!--Class added as an annotated class in HibernateUtil class-->
+        <!--<mapping class="ru.students.lab.models.Point" />-->
     </session-factory>
 </hibernate-configuration>

@@ -36,6 +36,7 @@
           <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8" />
           <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" />
           <element id="library" level="project" name="Maven: com.oracle.database.jdbc:ojdbc8:19.7.0.0" />
+          <element id="library" level="project" name="Maven: com.oracle.ojdbc:orai18n:19.3.0.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
