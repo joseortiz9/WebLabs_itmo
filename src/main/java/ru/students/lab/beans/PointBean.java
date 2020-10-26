@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @ManagedBean(name = "pointBean")
@@ -24,6 +26,7 @@ public class PointBean implements Serializable {
 
     public List<Point> getSavedPoints() {
         pointsList = pointDao.getPoints();
+        Collections.sort(pointsList);
         return pointsList;
     }
 

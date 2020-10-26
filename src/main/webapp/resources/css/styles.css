@@ -1,6 +1,6 @@
 @font-face {
     font-family: "title-font";
-    src: url("fonts/chaplin-type-font/title-jumbotron-font.ttf");
+    src: url("#{resource['fonts/chaplin-type-font/title-jumbotron-font.ttf']}");
 }
 
 html {
@@ -8,8 +8,8 @@ html {
 }
 
 body {
-    color: white;
-    background-image: url(images/orcs_flying.gif);
+    color: white !important;
+    background-image: url("#{resource['images/orcs_flying.gif']}");
     background-size: 25%;
     background-repeat: repeat;
 }
@@ -21,8 +21,9 @@ body {
 
 .jumbotron {
     margin-top: 30px;
-    background-color: #55efc4;
-    background-image: linear-gradient(315deg, #55efc4 0%, #000000 74%);
+    background: #6d98c4; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffd194, #6d98c4) transparent 50%; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffd194, #6d98c4) transparent 50%; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .header-text {
     font-family: 'title-font', sans-serif;
@@ -56,7 +57,7 @@ div.custom-card {
     padding: 10px;
 }
 
-table#results-table {margin-top: 30px;}
+table#results-table {margin-top: 30px}
 table#results-table tbody tr td.green-row {background: rgba(0, 255, 0, 0.15);}
 table#results-table tbody tr td.red-row {background: rgba(255, 0, 0, 0.15);}
 table#results-table tbody tr td.column-limited {word-break: break-all;}
