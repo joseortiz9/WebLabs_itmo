@@ -52,6 +52,22 @@ div.custom-card {
     padding: 10px;
 }
 
+#point_form #r_option_values a {
+    background-color: olivedrab;
+    box-shadow: 2px 2px 5px olivedrab;
+    border-radius: 50%;
+    border: 3px solid darkgreen;
+    padding: 5px 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+}
+#point_form #r_option_values a:hover {
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
 #table_form table {margin-top: 30px}
 #table_form table tbody tr td.green-row {background: rgba(0, 255, 0, 0.15);}
 #table_form table tbody tr td.red-row {background: rgba(255, 0, 0, 0.15);}

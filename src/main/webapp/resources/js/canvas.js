@@ -1,6 +1,4 @@
 
-$('#canvas-container').html('<canvas id="graph-canvas" style="width: 100%; height: 35vh"></canvas>')
-
 let canvasCtx = $('#graph-canvas')[0].getContext('2d');
 const width = canvasCtx.canvas.width;
 const height = canvasCtx.canvas.height;

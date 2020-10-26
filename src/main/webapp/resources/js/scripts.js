@@ -1,7 +1,7 @@
 
-
-//$('#r_option_values').click(function () {})
-
+/*
+* change the hidden input of r depending on the link selection
+* */
 function changeR(selectedR) {
     $("#point_form")[0].elements["point_form:r"].value = selectedR.textContent;
 }

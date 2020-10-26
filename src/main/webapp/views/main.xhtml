@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Main - Weblab3</title>
+
+    <link rel="shortcut icon" type = "image/x-icon" href="#{resource['images/favicon/favicon-16x16.png']}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputScript library="primefaces" name="jquery/jquery.js" />
+</h:head>
+
+<h:body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <h:link class="navbar-brand" href="#">
+            <h:graphicImage library="images" name="favicon/favicon-32x32.png"
+                            width="30" height="30" class="d-inline-block align-top" alt="brans-logo"
+            />
+            LAB3
+        </h:link>
+        <h:link class="nav-item nav-link" outcome="to_index" value="Landing Page" />
+        <a class="nav-item nav-link" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center header-text">
+                <span data-melo="ig round-left">Ortiz</span>
+                <span data-melo="ig round-right">Jose</span> -
+                <span data-melo="ig round-left1">Tarasova</span>
+                <span data-melo="ig round-right1">Natasha</span>
+                <br/>
+                - P3232 -
+                <span data-melo="ig weird-title">Var. 2832</span>
+            </h1>
+        </div>
+
+        <p:messages id="error_msgs" />
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="custom-card">
+                    <canvas id="graph-canvas" style="width: 100%; height: 35vh"></canvas>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="custom-card">
+                    <h:form id="point_form">
+                        <div class="ui-fluid">
+                            <p:panelGrid columns="2" columnClasses="twenty-percent, ">
+                                <p:outputLabel for="x" value="X:" />
+                                <p:outputPanel>
+                                    <p:inputNumber id="x" value="#{pointBean.point.x}" required="true" readonly="#{facesContext.renderResponse}" >
+                                        <f:validateLongRange minimum="-5" maximum="5" />
+                                    </p:inputNumber>
+                                    <p:slider for="x" minValue="-5" maxValue="5" step="1" />
+                                </p:outputPanel>
+
+                                <p:outputLabel for="y" value="Y:" />
+                                <p:inputNumber id="y" value="#{pointBean.point.y}" required="true" placeholder="value in [-5..3]" >
+                                    <f:validateDoubleRange minimum="-5" maximum="3" />
+                                </p:inputNumber>
+
+                                <p:outputLabel for="r" value="R:" />
+                                <p:outputPanel>
+                                    <h:inputHidden id="r" value="#{pointBean.point.r}" >
+                                        <f:validateLongRange minimum="1" maximum="5" />
+                                    </h:inputHidden>
+
+                                    <div id="r_option_values">
+                                        <p:commandLink value="1" onclick="changeR(this); return false;" />
+                                        <p:commandLink value="2" onclick="changeR(this); return false;" />
+                                        <p:commandLink value="3" onclick="changeR(this); return false;" />
+                                        <p:commandLink value="4" onclick="changeR(this); return false;" />
+                                        <p:commandLink value="5" onclick="changeR(this); return false;" />
+                                    </div>
+                                </p:outputPanel>
+
+                                <p:commandButton type="submit" id="submit-btn" class="btn btn-dark"
+                                                 update=":table_form:results_table error_msgs" value="add" action="#{pointBean.addPoint()}" />
+                            </p:panelGrid>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+        <h:form id="table_form">
+            <h:dataTable class="table table-striped table-hover table-dark text-center" id="results_table" value="#{pointBean.savedPoints}" var="point">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{point.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{point.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{point.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{point.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">result</f:facet>
+                    #{point.result}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">creation time</f:facet>
+                    #{point.createTime}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </div>
+    <h:outputScript library="js" name="canvas.js" />
+    <h:outputScript library="js" name="scripts.js" />
+</h:body>
+</html>
