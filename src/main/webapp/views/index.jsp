@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<html lang="en"      xmlns:h="http://java.sun.com/jsf/html" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +11,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="../assets/images/favicon/site.webmanifest">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css">
 </head>
 
-<body>
+<h: body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <img src="../assets/images/favicon/favicon-32x32.png" width="30" height="30"
@@ -116,7 +116,7 @@
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../assets/canvas.js"></script>
-<script src="../assets/scripts.js"></script>
-</body>
+<script src="../resources/js/canvas.js"></script>
+<script src="../resources/js/scripts.js"></script>
+</h: body>
 </html>
