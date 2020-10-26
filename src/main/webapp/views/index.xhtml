@@ -15,6 +15,7 @@
     <h:outputStylesheet library="css" name="styles.css" />
     <h:outputScript library="primefaces" name="jquery/jquery.js" />
     <h:outputScript library="js" name="scripts.js" />
+    <h:outputScript library="js" name="canvas.js" />
 </h:head>
 
 <h:body>
@@ -34,38 +35,49 @@
 
         <p:messages id="error_msgs" />
 
-        <h:form id="point_form">
-            <p>X:
-                <p:inputNumber id="x" value="#{pointBean.point.x}" required="true" readonly="#{facesContext.renderResponse}" >
-                    <f:validateLongRange minimum="-5" maximum="5" />
-                </p:inputNumber>
-                <p:slider for="x" minValue="-5" maxValue="5" step="1" style="max-width: 300px"/>
-            </p>
-            <p> Y:
-                <p:inputNumber id="y" value="#{pointBean.point.y}" required="true" placeholder="value in [-5..3]" >
-                    <f:validateDoubleRange minimum="-5" maximum="3" />
-                </p:inputNumber>
-            </p>
+        <div class="row">
+            <div class="col-sm">
+                <div class="custom-card">
+                    <div id="canvas-container"></div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="custom-card">
+                    <h:form id="point_form">
+                        <p>X:
+                            <p:inputNumber id="x" value="#{pointBean.point.x}" required="true" readonly="#{facesContext.renderResponse}" >
+                                <f:validateLongRange minimum="-5" maximum="5" />
+                            </p:inputNumber>
+                            <p:slider for="x" minValue="-5" maxValue="5" step="1" style="max-width: 300px"/>
+                        </p>
+                        <p> Y:
+                            <p:inputNumber id="y" value="#{pointBean.point.y}" required="true" placeholder="value in [-5..3]" >
+                                <f:validateDoubleRange minimum="-5" maximum="3" />
+                            </p:inputNumber>
+                        </p>
 
-            <p> R:
-                <h:inputHidden id="r" value="#{pointBean.point.r}" >
-                    <f:validateLongRange minimum="1" maximum="5" />
-                </h:inputHidden>
+                        <p> R:
+                            <h:inputHidden id="r" value="#{pointBean.point.r}" >
+                                <f:validateLongRange minimum="1" maximum="5" />
+                            </h:inputHidden>
 
-                <span id="r_option_values">
-                    <p:commandLink value="1" onclick="changeR(this); return false;" />
-                    <p:commandLink value="2" onclick="changeR(this); return false;" />
-                    <p:commandLink value="3" onclick="changeR(this); return false;" />
-                    <p:commandLink value="4" onclick="changeR(this); return false;" />
-                    <p:commandLink value="5" onclick="changeR(this); return false;" />
-                </span>
-            </p>
-            <p:commandButton type="submit" id="submit-btn" update=":table_form:results_table error_msgs" value="add" action="#{pointBean.addPoint()}" />
-        </h:form>
+                            <span id="r_option_values">
+                        <p:commandLink value="1" onclick="changeR(this); return false;" />
+                        <p:commandLink value="2" onclick="changeR(this); return false;" />
+                        <p:commandLink value="3" onclick="changeR(this); return false;" />
+                        <p:commandLink value="4" onclick="changeR(this); return false;" />
+                        <p:commandLink value="5" onclick="changeR(this); return false;" />
+                    </span>
+                        </p>
+                        <p:commandButton type="submit" id="submit-btn" update=":table_form:results_table error_msgs" value="add" action="#{pointBean.addPoint()}" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
 
 
         <h:form id="table_form">
-            <h:dataTable id="results_table" value="#{pointBean.savedPoints}" var="point">
+            <h:dataTable class="table table-striped table-hover table-dark text-center" id="results_table" value="#{pointBean.savedPoints}" var="point">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     #{point.id}
