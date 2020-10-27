@@ -18,14 +18,14 @@
 
 <h:body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <h:link class="navbar-brand" href="#">
+        <h:link class="navbar-brand" outcome="to_index">
             <h:graphicImage library="images" name="favicon/favicon-32x32.png"
                             width="30" height="30" class="d-inline-block align-top" alt="brans-logo"
             />
             LAB3
         </h:link>
-        <h:link class="nav-item nav-link" outcome="to_index" value="Landing Page" />
-        <a class="nav-item nav-link" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
+        <h:link class="nav-item nav-link" style="color: red; font-weight: bold" outcome="to_index" value="Landing Page" />
+        <a class="nav-item nav-link" style="color: deepskyblue; font-weight: bold" href="https://github.com/joseortiz9/WebLabs_itmo">GitHub</a>
     </nav>
 
     <div class="container">
@@ -83,7 +83,8 @@
                                 </p:outputPanel>
 
                                 <p:commandButton type="submit" id="submit-btn" class="btn btn-dark"
-                                                 update=":table_form:results_table error_msgs" value="add" action="#{pointBean.addPoint()}" />
+                                                 update=":table_form:results_table error_msgs" oncomplete="drawCanvas();"
+                                                 value="add" action="#{pointBean.addPoint()}" />
                             </p:panelGrid>
                         </div>
                     </h:form>
