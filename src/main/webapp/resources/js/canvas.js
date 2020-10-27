@@ -1,5 +1,7 @@
 
-let canvasCtx = $('#graph-canvas')[0].getContext('2d');
+const pointForm = $("#point_form")
+const canvas = $('#graph-canvas')
+let canvasCtx = canvas[0].getContext('2d');
 const width = canvasCtx.canvas.width;
 const height = canvasCtx.canvas.height;
 let R = height / 3;
@@ -35,22 +37,22 @@ function drawCanvas() {
     canvasCtx.strokeStyle = "rgba(255,255,255,0.8)";
     canvasCtx.fillStyle = "rgba(255,255,255,0.8)";
 
-    //circle on the right down
+    //circle on the left down
     canvasCtx.beginPath();
     canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R/2, Math.PI/2, 0, true);
+    canvasCtx.arc(getPhysicalX(0), getPhysicalY(0), R/2, Math.PI, Math.PI/2, true);
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
 
-    //square in the right up
-    canvasCtx.fillRect(getPhysicalX(0), getPhysicalY(0) - R, R, R);
+    //square in the right down
+    canvasCtx.fillRect(getPhysicalX(0), getPhysicalY(0), R, R/2);
 
     //triangle
     canvasCtx.beginPath();
-    canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0)-R);
+    canvasCtx.moveTo(getPhysicalX(0), getPhysicalY(0) - R/2);
     canvasCtx.lineTo(getPhysicalX(0), getPhysicalY(0));
-    canvasCtx.lineTo(getPhysicalX(0)-R/2, getPhysicalY(0));
+    canvasCtx.lineTo(getPhysicalX(0)+R/2, getPhysicalY(0));
     canvasCtx.closePath();
     canvasCtx.fill();
     canvasCtx.stroke();
@@ -91,7 +93,13 @@ function drawCanvas() {
     canvasCtx.fillText('Y', getPhysicalX(0) - 10, maxY + limitMargin)
 
     // drawing tick marks
-    let valR = $('input[name="r"]:checked').val();
+    let valR;
+    if(pointForm[0].elements["point_form:r"].value === "") {
+        valR = pointForm[0].elements["point_form:r"].value = 1;
+    } else {
+        valR = pointForm[0].elements["point_form:r"].value;
+    }
+
     const startTickX = width / 1.95, finishTickX = width / 2.05;
     const startTickY = height / 1.9, finishTickY = height / 2.1;
 
@@ -139,30 +147,29 @@ function drawCanvas() {
     canvasCtx.lineTo(getPhysicalX(0) - R / 2, finishTickY);
     canvasCtx.stroke();
 
-    drawSavedPoints();
+    drawSavedPoints(valR);
 }
 
 
 
 function getPointsByRows() {
     let myRows = [];
-    $('#results-table tbody tr').each(function (index) {
+    $('#table_form table tbody tr').each(function (index) {
         myRows[index] = {};
         $(this).find("td").each(function (cellIndex) {
-            myRows[index][$($("th")[cellIndex]).html()] = $(this).html();
+            myRows[index][$($("th")[cellIndex]).html()] = $(this).html().trim();
         });
     });
     return myRows;
 }
 
-function drawSavedPoints() {
-    let valR = $('input[name="r"]:checked').val();
+function drawSavedPoints(valR) {
     let savedTablePoints = getPointsByRows();
     if (savedTablePoints == null)
         return;
 
     for (const i in savedTablePoints) {
-        let color = (savedTablePoints[i].RESULT == "true") ? "green" : "red";
+        let color = (savedTablePoints[i].result == "true") ? "green" : "red";
         drawPoint(savedTablePoints[i].X, savedTablePoints[i].Y, valR, color);
     }
 }
@@ -183,21 +190,17 @@ function drawPoint(x, y, r, color = "red") {
 }
 
 
-$('#graph-canvas').click(function (event) {
+canvas.click(function (event) {
     try {
-        let valR = $('input[name="r"]:checked').val();
+        let valR = pointForm[0].elements["point_form:r"].value;
         let physicR = height / 3 / valR;
         const clickedX = (getMousePos(event).X - width/2) / physicR;
         const clickedY = (-getMousePos(event).Y + height/2) / physicR;
 
-        $('input[name="x"]')
-            .append(`<div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="${clickedX}" name="x" value="${clickedX}" checked>
-                    <label class="form-check-label" for="${clickedX}">${clickedX}</label>
-                </div>`);
-        $("input#y").val(clickedY);
-        $('button#submit-btn').click();
         drawPoint(clickedX, clickedY, valR);
+        pointForm[0].elements["point_form:x_hinput"].value = clickedX.toFixed(2);
+        pointForm[0].elements["point_form:y_hinput"].value = clickedY.toFixed(2);
+        pointForm[0].elements["point_form:submit-btn"].click();
     } catch (e) {
         console.log(e.toLocaleString());
     }

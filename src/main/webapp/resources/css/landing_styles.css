@@ -1,0 +1,129 @@
+@font-face {
+    font-family: "clock-font";
+    src: url("#{resource['fonts/digital-dream/DIGITALDREAM.ttf']}");
+}
+
+html, body {
+    background: #1874d2 !important;
+}
+
+body {
+    overflow-y:hidden;
+}
+
+.jumbotron {
+    margin-top: 30px;
+    background-color: rgba(163, 163, 163, 0.7);
+    background-clip: border-box;
+    border: 3px solid rgb(0, 83, 161);
+}
+
+.jumbotron h1 {
+    font-size: 3rem;
+    color: #003f65;
+    font-family: 'sans-serif', cursive;
+    font-weight: 700;
+    text-shadow: 3px 3px 0 #eb452b,
+    6px 6px 0 #efa032,
+    10px 10px 0 #46b59b,
+    15px 15px 0 #017e7f;
+}
+
+.clock {
+    font-family: 'clock-font', sans-serif;
+    font-size: 2rem;
+}
+
+img.landing-picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+
+/*Special thanks to: https://webdeasy.de/en/top-css-buttons-en/*/
+.button-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a#main-btn {
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+}
+
+a#main-btn::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#main-btn:hover, a#main-btn:focus {
+    color: #313133;
+    transform: translateY(-6px);
+}
+
+a#main-btn:hover::before, a#main-btn:focus::before {
+    opacity: 1;
+}
+
+a#main-btn::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+
+a#main-btn:hover::after, a#main-btn:focus::after {
+    animation: none;
+    display: none;
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}

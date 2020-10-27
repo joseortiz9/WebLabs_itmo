@@ -45,13 +45,13 @@ public class Point implements Serializable, Comparable<Point> {
         if (x == null || y == null || r == null)
             throw new NullPointerException();
 
-        this.result = (x <= 0 && y >= 0 && y <= 2*x + r) //linear function
-                || (y <= 0 && x >= 0 && y >= -Math.sqrt(r * r / 4 - x * x)) //circular function
-                || (y >= 0 && x >= 0 && y <= r && x <= r); //lines on r
+        this.result = (x >= 0 && y >= 0 && y <= -x + r/2) //linear function
+                || (y <= 0 && x <= 0 && y >= -Math.sqrt(r * r / 4 - x * x)) //circular function
+                || (y <= 0 && x >= 0 && y >= -r/2 && x <= r); //lines on r
     }
 
     public String getCreatedTimeFormatted() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy 'at' HH:mm:ss a");
         return createTime.format(formatter);
     }
 

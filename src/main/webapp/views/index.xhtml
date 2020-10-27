@@ -2,38 +2,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
     <title>Lading page - Weblab3</title>
     <link rel="shortcut icon" type = "image/x-icon" href="#{resource['images/favicon/favicon-16x16.png']}"/>
-    <h:outputStylesheet>
-        html {
-            background: #1874d2;
-        }
-
-        .container {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(163, 163, 163, 0.7);
-            background-clip: border-box;
-            border: 3px solid rgb(0, 83, 161);
-            border-radius: .40rem;
-            padding: 10px;
-        }
-    </h:outputStylesheet>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="landing_styles.css" />
 </h:head>
 
 <h:body>
-    <div class="container">
-        <h:outputText value="#{timeBean.currentDate}">
-            <f:convertDateTime dateStyle="full" pattern="dd.MM.yyyy 'at' HH:mm:ss z"/>
-        </h:outputText>
-        <br/>
-        <h:link id="main_btn" outcome="to_main" value="Main Page" />
+    <div class="container center">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="text-center">
+                        Tarasova Natasha <br/> Ortiz Jose <br/> - P3232 - Var. 2832
+                    </h1>
+                </div>
+                <div class="col-sm-4">
+                    <div class="clock" id="dateTimePrinter" onload="showDateTime()"></div>
+                </div>
+            </div>
+        </div>
+
+        <img src="#{resource['images/landing_picture.gif']}" class="landing-picture" alt="landing-logo"/>
+
+        <div class="button-wrap">
+            <h:link id="main-btn" outcome="to_main" value="Main Page" />
+        </div>
     </div>
+
+    <h:outputScript library="js" name="date_printer.js" />
 </h:body>
 </html>

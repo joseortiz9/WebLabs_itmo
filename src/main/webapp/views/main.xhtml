@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" type = "image/x-icon" href="#{resource['images/favicon/favicon-16x16.png']}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputStylesheet library="css" name="main_styles.css" />
     <h:outputScript library="primefaces" name="jquery/jquery.js" />
 </h:head>
 
@@ -53,7 +53,7 @@
                 <div class="custom-card">
                     <h:form id="point_form">
                         <div class="ui-fluid">
-                            <p:panelGrid columns="2" columnClasses="twenty-percent, ">
+                            <p:panelGrid columns="2" style="width: 100%" columnClasses="twenty-percent, eighty percent">
                                 <p:outputLabel for="x" value="X:" />
                                 <p:outputPanel>
                                     <p:inputNumber id="x" value="#{pointBean.point.x}" required="true" readonly="#{facesContext.renderResponse}" >
@@ -69,7 +69,7 @@
 
                                 <p:outputLabel for="r" value="R:" />
                                 <p:outputPanel>
-                                    <h:inputHidden id="r" value="#{pointBean.point.r}" >
+                                    <h:inputHidden id="r" value="#{pointBean.point.r}" required="true" >
                                         <f:validateLongRange minimum="1" maximum="5" />
                                     </h:inputHidden>
 
@@ -116,7 +116,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">creation time</f:facet>
-                    #{point.createTime}
+                    #{point.createdTimeFormatted}
                 </h:column>
             </h:dataTable>
         </h:form>
