@@ -15,7 +15,7 @@ import java.util.List;
 @SessionScoped
 public class PointBean implements Serializable {
 
-    private PointDao pointDao = new PointDao();
+    private final PointDao pointDao = new PointDao();
     private List<Point> pointsList;
     private Point point;
 
@@ -25,7 +25,7 @@ public class PointBean implements Serializable {
     }
 
     public List<Point> getSavedPoints() {
-        pointsList = pointDao.getPoints();
+        pointsList = pointDao.getAll();
         Collections.sort(pointsList);
         return pointsList;
     }
