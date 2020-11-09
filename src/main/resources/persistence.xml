@@ -7,18 +7,15 @@
     <persistence-unit name="pointsManagement" transaction-type="RESOURCE_LOCAL">
         <!-- Persistence provider -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/OracleDS</jta-data-source>
         <!-- Entity classes -->
         <class>ru.students.lab.models.Point</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:orbis" />
-            <property name="javax.persistence.jdbc.user" value="s288867" />
-            <property name="javax.persistence.jdbc.password" value="qfb977" />
-            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
+
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-            <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />-->
-            <!--<property name="dialect" value="org.hibernate.dialect.Oracle8iDialect"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle8iDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            
         </properties>
     </persistence-unit>
 </persistence>
