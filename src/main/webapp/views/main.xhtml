@@ -83,7 +83,7 @@
                                 </p:outputPanel>
 
                                 <p:commandButton type="submit" id="submit-btn" class="btn btn-dark"
-                                                 update=":table_form:results_table error_msgs" oncomplete="drawCanvas();"
+                                                 update=":table_form:results_table error_msgs" oncomplete="drawCanvas();clearForm();"
                                                  value="add" action="#{pointBean.addPoint()}" />
                             </p:panelGrid>
                         </div>

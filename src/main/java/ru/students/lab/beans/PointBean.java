@@ -4,6 +4,7 @@ import ru.students.lab.dao.PointDao;
 import ru.students.lab.models.Point;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +16,8 @@ import java.util.List;
 @SessionScoped
 public class PointBean implements Serializable {
 
-    private final PointDao pointDao = new PointDao();
+    @ManagedProperty(value = "#{pointDao}")
+    private PointDao pointDao;
     private List<Point> pointsList;
     private Point point;
 
@@ -25,7 +27,7 @@ public class PointBean implements Serializable {
     }
 
     public List<Point> getSavedPoints() {
-        pointsList = pointDao.getAll();
+        pointsList = pointDao.getPoints();
         Collections.sort(pointsList);
         return pointsList;
     }
@@ -47,5 +49,11 @@ public class PointBean implements Serializable {
     }
     public void setPoint(Point point) {
         this.point = point;
+    }
+    public PointDao getPointDao() {
+        return pointDao;
+    }
+    public void setPointDao(PointDao pointDao) {
+        this.pointDao = pointDao;
     }
 }
