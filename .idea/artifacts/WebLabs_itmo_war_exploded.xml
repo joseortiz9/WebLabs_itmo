@@ -43,7 +43,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/target/WebLabs_itmo-3.0/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="WebLabs_itmo/web/Web" />
-      <element id="jpa-descriptors" facet="WebLabs_itmo/jpa/JPA" />
     </root>
   </artifact>
 </component>
